@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Form</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#f4f4f4;
+            gap:40px;
+        }
+
+        .form-container{
+            width:400px;
+            background:white;
+            padding:25px;
+            border-radius:10px;
+            border:1px solid #ccc;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .form-container h2{
+            text-align:center;
+            margin-bottom:20px;
+        }
+
+        input,
+        select{
+            width:100%;
+            padding:10px;
+            margin-top:8px;
+            margin-bottom:15px;
+        }
+
+        .gender{
+            margin-bottom:15px;
+        }
+
+        .gender input{
+            width:auto;
+            margin-right:5px;
+        }
+
+        button{
+            width:100%;
+            padding:10px;
+            background:#2563eb;
+            color:white;
+            border:none;
+            cursor:pointer;
+            border-radius:5px;
+        }
+
+        button:hover{
+            background:#1d4ed8;
+        }
+
+        .output{
+            width:350px;
+            min-height:250px;
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            border:1px solid #ccc;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .output h3{
+            margin-bottom:15px;
+            color:#2563eb;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h2>Student Form</h2>
+
+        <label>First Name</label>
+        <input type="text" id="fname">
+
+        <label>Last Name</label>
+        <input type="text" id="lname">
+
+        <label>Phone Number</label>
+        <input type="number" id="phone">
+
+        <label>Gender</label>
+
+        <div class="gender">
+
+            <input type="radio" name="gender" value="Male"> Male
+
+            <input type="radio" name="gender" value="Female"> Female
+
+        </div>
+
+        <label>Course</label>
+
+        <select id="course">
+            <option>Select Course</option>
+        </select>
+
+        <button onclick="saveStudent()">
+            Submit
+        </button>
+
+    </div>
+
+    <div class="output" id="output">
+
+        <h3>Student Details</h3>
+
+        <p>No Data Available</p>
+
+    </div>
+
+<script>
+
+let courses = [
+    "Java",
+    "Python",
+    "React",
+    "Node JS",
+    "Full Stack"
+];
+
+let dropdown = document.getElementById("course");
+
+courses.forEach(function(course){
+
+    let option = document.createElement("option");
+
+    option.text = course;
+    option.value = course;
+
+    dropdown.appendChild(option);
+
+});
+
+function saveStudent(){
+
+    let gender =
+    document.querySelector('input[name="gender"]:checked');
+
+    let student = {
+
+        firstName:
+        document.getElementById("fname").value,
+
+        lastName:
+        document.getElementById("lname").value,
+
+        phone:
+        document.getElementById("phone").value,
+
+        gender:
+        gender ? gender.value : "",
+
+        course:
+        document.getElementById("course").value
+
+    };
+
+    document.getElementById("output").innerHTML = `
+
+        <h3>Student Object</h3>
+
+        <p><b>First Name:</b> ${student.firstName}</p>
+        <br>
+
+        <p><b>Last Name:</b> ${student.lastName}</p>
+        <br>
+
+        <p><b>Phone:</b> ${student.phone}</p>
+        <br>
+
+        <p><b>Gender:</b> ${student.gender}</p>
+        <br>
+
+        <p><b>Course:</b> ${student.course}</p>
+
+    `;
+
+    console.log(student);
+
+}
+
+</script>
+
+</body>
+</html>
